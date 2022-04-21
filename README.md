@@ -80,6 +80,11 @@ This library is made available via [JitPack](https://jitpack.io/). Here's how yo
 repositories {
     maven {
         url = uri("https://jitpack.io")
+
+        // You can ensure that only this library is loaded from JitPack, and nothing else, using "repository content filtering": https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:repository-content-filtering
+        content {
+            includeGroup("com.github.nmalkin")
+        }
     }
 }
 
@@ -94,6 +99,11 @@ dependencies {
 repositories {
     maven {
         url 'https://jitpack.io'
+
+        // You can ensure that only this library is loaded from JitPack, and nothing else, using "repository content filtering": https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:repository-content-filtering
+        content {
+            includeGroup 'com.github.nmalkin'
+        }
     }
 }
 
