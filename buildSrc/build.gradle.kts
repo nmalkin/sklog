@@ -1,12 +1,12 @@
 plugins {
     `kotlin-dsl`
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm") version "1.7.10"
 }
 
 repositories {
-    gradlePluginPortal() // so that external plugins can be resolved in dependencies section
+    gradlePluginPortal()
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
 }
