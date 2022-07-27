@@ -32,13 +32,15 @@ private fun classNameFromClosure(func: () -> Unit): String {
     }
 }
 
+/** The formatter for dates in the log output */
+var TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+
 /**
  * Returns the current time, formatted, as a string
  */
 private fun getCurrentTime(): String {
     val current = LocalDateTime.now()
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
-    return current.format(formatter)
+    return current.format(TIMESTAMP_FORMATTER)
 }
 
 /**
