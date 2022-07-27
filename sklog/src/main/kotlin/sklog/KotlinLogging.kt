@@ -1,6 +1,6 @@
 /**
  * sklog - simple kotlin logger
- * v0.0.1
+ * v0.0.2
  *
  * Copyright (C) 2021 N.Malkin
  * SPDX-License-Identifier: BSD-3-Clause

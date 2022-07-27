@@ -89,7 +89,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.nmalkin:sklog:0.0.1")
+    implementation("com.github.nmalkin:sklog:0.0.2")
 }
 ```
 
@@ -108,7 +108,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.nmalkin:sklog:0.0.1'
+    implementation 'com.github.nmalkin:sklog:0.0.2'
 }
 ```
 
@@ -124,7 +124,7 @@ dependencies {
 <dependency>
   <groupId>com.github.nmalkin</groupId>
   <artifactId>sklog</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
 </dependency>
 ```
 
