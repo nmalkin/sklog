@@ -104,7 +104,7 @@ class Logger(private val name: String) {
     var colorize: Boolean = DEFAULT_COLORIZE
 
     fun trace(msg: String?) {
-        trace { msg }
+        log(LogLevel.TRACE, msg)
     }
 
     fun trace(msg: () -> Any?) {
@@ -112,7 +112,7 @@ class Logger(private val name: String) {
     }
 
     fun debug(msg: String?) {
-        debug { msg }
+        log(LogLevel.DEBUG, msg)
     }
 
     fun debug(msg: () -> Any?) {
@@ -120,7 +120,7 @@ class Logger(private val name: String) {
     }
 
     fun info(msg: String?) {
-        info { msg }
+        log(LogLevel.INFO, msg)
     }
 
     fun info(msg: () -> Any?) {
@@ -128,7 +128,7 @@ class Logger(private val name: String) {
     }
 
     fun warning(msg: String?) {
-        warning { msg }
+        log(LogLevel.WARNING, msg)
     }
 
     fun warning(msg: () -> Any?) {
@@ -136,11 +136,15 @@ class Logger(private val name: String) {
     }
 
     fun error(msg: String?) {
-        error { msg }
+        log(LogLevel.ERROR, msg)
     }
 
     fun error(msg: () -> Any?) {
         log(LogLevel.ERROR, msg)
+    }
+
+    fun error(exception: Throwable, msg: String?) {
+        log(LogLevel.ERROR) { "${exception.message}: $msg" }
     }
 
     fun error(exception: Throwable, msg: () -> Any?) {
@@ -156,6 +160,24 @@ class Logger(private val name: String) {
 
         try {
             val messageString = msg.invoke().toString()
+            printLogMessage(level, messageString)
+        } catch (e: Exception) {
+            System.err.println("encountered error in invoking log message")
+            e.printStackTrace()
+        }
+    }
+
+    private fun log(level: LogLevel, msg: String?) {
+        val currentLogLevel = this.logLevel ?: DEFAULT_LOG_LEVEL
+        if (level < currentLogLevel) {
+            return
+        }
+
+        printLogMessage(level, msg.orEmpty())
+    }
+
+    private fun printLogMessage(level: LogLevel, messageString: String) {
+        try {
             val statement = if (this.colorize) {
                 val color = colorForLevel(level)
                 "$color${getCurrentTime()} - $name - $level - $messageString${Color.RESET}"
@@ -165,7 +187,7 @@ class Logger(private val name: String) {
 
             System.err.println(statement)
         } catch (e: Exception) {
-            System.err.println("encountered error while trying to log message")
+            System.err.println("encountered error while formatting log message")
             e.printStackTrace()
         }
     }
